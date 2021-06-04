@@ -1,0 +1,43 @@
+char t;
+ 
+void setup() {
+pinMode(9,OUTPUT);   //forward direction of left motors
+pinMode(8,OUTPUT);   //reverse direction of left motors
+pinMode(7,OUTPUT);   //forward direction of right motors
+pinMode(6,OUTPUT);   //reverse direction of right motors
+Serial.begin(9600);
+ 
+}
+ 
+void loop() {
+if(Serial.available()){
+  t = Serial.read();
+  Serial.println(t);
+}
+ 
+if(t == 'F'){            //for the movement of all motors in forward direction
+  digitalWrite(9,HIGH);
+  digitalWrite(7,HIGH);
+}
+ 
+else if(t == 'B'){      //for the movement of all motors in reverse direction
+  digitalWrite(8,HIGH);
+  digitalWrite(6,HIGH);
+}
+ 
+else if(t == 'L'){      //to turn right
+  digitalWrite(7,HIGH);
+}
+ 
+else if(t == 'R'){      //to turn left
+  digitalWrite(9,HIGH);
+}
+ 
+else if(t == 'S'){      //to stop the  motors
+  digitalWrite(9,LOW);
+  digitalWrite(8,LOW);
+  digitalWrite(7,LOW);
+  digitalWrite(6,LOW);
+}
+delay(100);
+}
